@@ -1,5 +1,21 @@
 <script setup lang="ts">
 import { PhArrowRight } from '@phosphor-icons/vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const githubUsername = ref('')
+
+const router = useRouter()
+
+const handleLogin = () => {
+  if (!githubUsername.value) return
+
+  const username = githubUsername.value.trim()
+
+  if (!username) return
+
+  router.push({ name: 'dashboard' })
+}
 </script>
 
 <template>
@@ -23,13 +39,15 @@ import { PhArrowRight } from '@phosphor-icons/vue'
           class="h-16 bg-gradient-to-r from-indigo-600 to-indigo-500 flex overflow-clip rounded-lg"
         >
           <input
+            v-model="githubUsername"
             class="px-8 grow placeholder:text-indigo-300 text-white"
             type="text"
             placeholder="Digite seu username"
           />
           <button
-            :disabled="true"
-            class="h-full aspect-square disabled:bg-indigo-600 disabled:text-indigo-200 disabled:cursor-not-allowed bg-green-500 text-white flex items-center justify-center"
+            :disabled="!githubUsername"
+            @click="handleLogin"
+            class="h-full aspect-square disabled:bg-indigo-600 disabled:text-indigo-200 disabled:cursor-not-allowed bg-green-500 hover:cursor-pointer transition-all duration-300 hover:bg-green-400 text-white flex items-center justify-center"
           >
             <PhArrowRight :size="24" />
           </button>
