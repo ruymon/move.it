@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { useChallengesStore } from './challenges'
 
-const DEFAULT_COUNTDOWN_TIME = 25 * 60
+const DEFAULT_COUNTDOWN_TIME = 0.2 * 60
 
 export const useCountdownStore = defineStore('countdown', () => {
+  const challengesStore = useChallengesStore()
+  const { startNewChallenge } = challengesStore
+
   const time = ref(DEFAULT_COUNTDOWN_TIME)
   const isActive = ref(false)
   const isFinished = ref(false)
@@ -18,12 +22,13 @@ export const useCountdownStore = defineStore('countdown', () => {
     isFinished.value = false
 
     intervalId.value = setInterval(() => {
-      if (time.value <= 0) {
+      if (isActive.value && time.value === 0) {
         clearInterval(intervalId.value!)
         intervalId.value = null
 
-        isActive.value = false
         isFinished.value = true
+        isActive.value = false
+        startNewChallenge()
       } else {
         time.value -= 1
       }
