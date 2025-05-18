@@ -1,23 +1,17 @@
 <script setup lang="ts">
 import CountDownTimer from '@/components/CountDownTimer.vue'
 import ChallengeCard from '@/components/ChallengeCard.vue'
+import ExperienceBar from '@/components/ExperienceBar.vue'
 import { useChallengesStore } from '@/stores/challenges'
+import { storeToRefs } from 'pinia'
 
 const challengesStore = useChallengesStore()
-const { challengesCompleted } = challengesStore
+const { challengesCompleted, level } = storeToRefs(challengesStore)
 </script>
 
 <template>
   <main class="flex flex-col flex-1 gap-24">
-    <div class="w-full flex items-center">
-      <span class="w-20 text-sm text-zinc-400">0 xp</span>
-
-      <div class="flex-1 h-1.5 rounded-full bg-zinc-200 overflow-clip">
-        <div class="w-[0%] bg-green-500 h-full" />
-      </div>
-
-      <span class="w-20 text-sm text-zinc-400 text-right">600 xp</span>
-    </div>
+    <ExperienceBar />
 
     <main class="flex gap-32">
       <aside class="w-full flex flex-col gap-14">
@@ -26,7 +20,7 @@ const { challengesCompleted } = challengesStore
 
           <div class="flex flex-col">
             <span class="text-2xl font-semibold text-zinc-700">Ruy Monteiro</span>
-            <span class="text-zinc-500">level 1</span>
+            <span class="text-zinc-500">Nível {{ level }}</span>
           </div>
         </header>
 

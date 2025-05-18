@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 import { useChallengesStore } from './challenges'
 
-const DEFAULT_COUNTDOWN_TIME = 0.2 * 60
+const DEFAULT_COUNTDOWN_TIME = 0.1 * 60
 
 export const useCountdownStore = defineStore('countdown', () => {
   const challengesStore = useChallengesStore()
