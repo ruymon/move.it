@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@phosphor-icons/vue": "^2.2.1",
     "@tailwindcss/vite": "^4.1.7",
     "pinia": "^3.0.1",
     "tailwindcss": "^4.1.7",
